@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "531069097246",
+    "project_id": "sharenoteapp-16f08",
+    "storage_bucket": "sharenoteapp-16f08.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531069097246:android:fa18274244e04194efe50f",
+        "android_client_info": {
+          "package_name": "com.sharenote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxBSdLDllEOizxOoDlwwlWcvw-Kew91xU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <EditText
+        android:id="@+id/etCourseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mata Kuliah"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        android:textColorHint="#888"
+        android:textColor="#000"
+        android:backgroundTint="#000"/>
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Judul Catatan"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        android:textColorHint="#888"
+        android:textColor="#000"
+        android:backgroundTint="#000"/>
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deskripsi"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp"
+        android:textColorHint="#888"
+        android:textColor="#000"
+        android:backgroundTint="#000"/>
+
+    <EditText
+        android:id="@+id/etDriveLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Link Google Drive"
+        android:background="@android:color/transparent"
+        android:inputType="textUri"
+        android:padding="8dp"
+        android:layout_marginBottom="32dp"
+        android:textColorHint="#888"
+        android:textColor="#000"
+        android:backgroundTint="#000"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/blue_button"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button"/>
+
+</LinearLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvRegisterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register Here"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#0381CE"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/poppins_bold" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Name"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/black"
+            android:textColorHint="#9E9E9E"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_regular" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Email"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/black"
+            android:textColorHint="#9E9E9E"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_regular" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:background="@drawable/bg_input"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="#9E9E9E"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/poppins_regular" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Sign Up"
+            android:textStyle="bold"
+            android:backgroundTint="@color/gray_button"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:enabled="false" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an Account?"
+                android:fontFamily="@font/poppins_regular" />
+
+            <TextView
+                android:id="@+id/tvToLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Login"
+                android:textColor="#0381CE"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

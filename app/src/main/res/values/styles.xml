@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema utama aplikasi -->
+    <style name="Theme.ShareNote" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary, Secondary, dll. -->
+    </style>
+
+    <!-- Tema khusus untuk Splash -->
+    <style name="Theme.ShareNote.Splash" parent="Theme.ShareNote">
+        <!-- Hilangkan ActionBar -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!-- Fullscreen (bila ingin status bar transparan) -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- Supaya background putih sesuai layout -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+</resources>
