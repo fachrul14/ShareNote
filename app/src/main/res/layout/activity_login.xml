@@ -32,7 +32,7 @@
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:hint="Email"
             android:background="@drawable/bg_input"
             android:paddingHorizontal="16dp"
@@ -42,18 +42,26 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/poppins_regular" />
 
-        <EditText
-            android:id="@+id/etPassword"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Password"
-            android:background="@drawable/bg_input"
-            android:paddingHorizontal="16dp"
-            android:inputType="textPassword"
-            android:textColor="@android:color/black"
-            android:textColorHint="#9E9E9E"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:fontFamily="@font/poppins_regular" />
+            app:endIconMode="password_toggle"
+            app:endIconTint="#9E9E9E">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:background="@drawable/bg_input"
+                android:paddingHorizontal="16dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#9E9E9E"
+                android:fontFamily="@font/poppins_regular" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnLogin"

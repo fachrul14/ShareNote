@@ -1,11 +1,15 @@
 package com.sharenote
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.sharenote.databinding.ActivityAddNoteBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AddNoteActivity : AppCompatActivity() {
 
@@ -23,6 +27,27 @@ class AddNoteActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             saveNote()
         }
+
+        // Bottom Navigation
+        val bottomNav = binding.bottomNavigationView
+        bottomNav.selectedItemId = R.id.nav_add // Set tab aktif ke Tambah
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_add -> true // Sudah di halaman ini
+                R.id.nav_account -> {
+                    startActivity(Intent(this, AccountActivity::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun saveNote() {
@@ -32,7 +57,7 @@ class AddNoteActivity : AppCompatActivity() {
         val driveLink = binding.etDriveLink.text.toString().trim()
 
         if (title.isEmpty() || description.isEmpty() || courseName.isEmpty() || driveLink.isEmpty()) {
-            Toast.makeText(this, "Harap isi semua kolom", Toast.LENGTH_SHORT).show()
+            showCustomToast("Harap isi semua kolom")
             return
         }
 
@@ -44,7 +69,6 @@ class AddNoteActivity : AppCompatActivity() {
 
         val noteId = dbRef.push().key!!  // Generate unique key
 
-        // Buat objek Note lengkap termasuk ID
         val noteData = Note(
             id = noteId,
             title = title,
@@ -55,11 +79,22 @@ class AddNoteActivity : AppCompatActivity() {
 
         dbRef.child(noteId).setValue(noteData)
             .addOnSuccessListener {
-                Toast.makeText(this, "Catatan berhasil disimpan", Toast.LENGTH_SHORT).show()
+                showCustomToast("Catatan berhasil disimpan")
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal menyimpan catatan", Toast.LENGTH_SHORT).show()
+                showCustomToast("Gagal menyimpan catatan")
             }
+    }
+
+    private fun showCustomToast(message: String) {
+        val layout = LayoutInflater.from(this).inflate(R.layout.custom_toast, null)
+        val textView: TextView = layout.findViewById(R.id.toast_text)
+        textView.text = message
+
+        val toast = Toast(this)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 }

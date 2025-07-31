@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -45,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.etEmail.addTextChangedListener(watcher)
         binding.etPassword.addTextChangedListener(watcher)
+
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -52,11 +54,11 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
+                        showCustomToast("Login berhasil")
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
-                        Toast.makeText(this, "Login gagal: ${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                        showCustomToast("Login gagal: ${it.exception?.message}")
                     }
                 }
         }
@@ -64,5 +66,17 @@ class LoginActivity : AppCompatActivity() {
         binding.tvToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+    }
+
+    private fun showCustomToast(message: String) {
+        val inflater = layoutInflater
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+        val text = layout.findViewById<TextView>(R.id.toast_text)
+        text.text = message
+
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 }

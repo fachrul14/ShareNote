@@ -1,66 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@android:color/white"
+    tools:context=".AddNoteActivity">
 
-    <LinearLayout
+    <!-- ScrollView agar isi bisa discroll dan tidak menumpuk BottomNavigationView -->
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationView"
+        android:fillViewport="true">
 
-        <EditText
-            android:id="@+id/etCourseName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama Mata Kuliah"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:inputType="text" />
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="100dp">
 
-        <EditText
-            android:id="@+id/etTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Judul Catatan"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="12dp"
-            android:inputType="text" />
+            <!-- Judul Halaman -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Catatan"
+                android:textSize="28sp"
+                android:textColor="#0381CE"
+                android:fontFamily="@font/poppins_bold"
+                android:textStyle="bold"
+                android:layout_marginBottom="32dp" />
 
-        <EditText
-            android:id="@+id/etDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Deskripsi"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="12dp"
-            android:inputType="textMultiLine"
-            android:minLines="3" />
+            <!-- Nama Mata Kuliah -->
+            <EditText
+                android:id="@+id/etCourseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Mata Kuliah"
+                android:padding="16dp"
+                android:background="@drawable/edit_text_background"
+                android:textColorHint="#444"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_regular" />
 
-        <EditText
-            android:id="@+id/etDriveLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Link Google Drive"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="12dp"
-            android:inputType="textUri" />
+            <!-- Judul Catatan -->
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Judul Catatan"
+                android:padding="16dp"
+                android:background="@drawable/edit_text_background"
+                android:textColorHint="#444"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_regular" />
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan Catatan"
-            android:backgroundTint="@color/blue_button"
-            android:textColor="#ffffff"
-            android:layout_marginTop="18dp"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp" />
+            <!-- Deskripsi -->
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Deskripsi"
+                android:padding="16dp"
+                android:background="@drawable/edit_text_background"
+                android:textColorHint="#444"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_regular" />
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Link Catatan -->
+            <EditText
+                android:id="@+id/etDriveLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Link Catatan"
+                android:padding="16dp"
+                android:background="@drawable/edit_text_background"
+                android:textColorHint="#444"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/poppins_regular" />
+
+            <!-- Tombol Simpan -->
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan Catatan"
+                android:backgroundTint="#0381CE"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:fontFamily="@font/poppins_bold" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#0381CE"
+        app:menu="@menu/bottom_navigation"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color" />
+</RelativeLayout>

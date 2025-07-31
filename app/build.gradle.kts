@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("C:\\SHARENOTE\\ShareNote.jks")
+            storePassword = "sharenote10"
+            keyAlias = "SN"
+            keyPassword = "sharenote10"
+        }
+    }
     namespace = "com.sharenote"
     compileSdk = 35
 
@@ -56,6 +64,10 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
+
+
 
 
 

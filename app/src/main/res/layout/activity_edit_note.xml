@@ -1,72 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    tools:context=".EditNoteActivity">
 
-    <EditText
-        android:id="@+id/etCourseName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mata Kuliah"
-        android:background="@android:color/transparent"
-        android:inputType="text"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"
-        android:textColorHint="#888"
-        android:textColor="#000"
-        android:backgroundTint="#000"/>
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="100dp">
 
-    <EditText
-        android:id="@+id/etTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Judul Catatan"
-        android:background="@android:color/transparent"
-        android:inputType="text"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"
-        android:textColorHint="#888"
-        android:textColor="#000"
-        android:backgroundTint="#000"/>
+        <!-- Judul Halaman -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Catatan"
+            android:textSize="28sp"
+            android:textColor="#0078D7"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/poppins_bold"/>
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Deskripsi"
-        android:background="@android:color/transparent"
-        android:inputType="text"
-        android:padding="8dp"
-        android:layout_marginBottom="24dp"
-        android:textColorHint="#888"
-        android:textColor="#000"
-        android:backgroundTint="#000"/>
+        <!-- Nama Mata Kuliah -->
+        <EditText
+            android:id="@+id/etCourseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Mata Kuliah"
+            android:backgroundTint="#DDDDDD"
+            android:padding="16dp"
+            android:background="@drawable/edit_text_background"
+            android:textColorHint="#444"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_regular"/>
 
-    <EditText
-        android:id="@+id/etDriveLink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Link Google Drive"
-        android:background="@android:color/transparent"
-        android:inputType="textUri"
-        android:padding="8dp"
-        android:layout_marginBottom="32dp"
-        android:textColorHint="#888"
-        android:textColor="#000"
-        android:backgroundTint="#000"/>
+        <!-- Judul Catatan -->
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Judul Catatan"
+            android:backgroundTint="#DDDDDD"
+            android:padding="16dp"
+            android:background="@drawable/edit_text_background"
+            android:textColorHint="#444"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_regular"/>
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="@color/blue_button"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_button"/>
+        <!-- Deskripsi -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Deskripsi"
+            android:backgroundTint="#DDDDDD"
+            android:padding="16dp"
+            android:background="@drawable/edit_text_background"
+            android:textColorHint="#444"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_regular"/>
 
-</LinearLayout>
+        <!-- Link Catatan -->
+        <EditText
+            android:id="@+id/etDriveLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Link Catatan"
+            android:backgroundTint="#DDDDDD"
+            android:padding="16dp"
+            android:background="@drawable/edit_text_background"
+            android:textColorHint="#444"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/poppins_regular"/>
+
+        <!-- Tombol Update -->
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan Perubahan"
+            android:backgroundTint="#0078D7"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:fontFamily="@font/poppins_bold"/>
+    </LinearLayout>
+</ScrollView>

@@ -20,7 +20,8 @@
             android:textStyle="bold"
             android:textColor="@android:color/holo_blue_dark"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"/>
 
         <!-- Judul Catatan -->
         <TextView
@@ -30,7 +31,8 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_bold"/>
 
         <!-- Deskripsi -->
         <TextView
@@ -39,7 +41,8 @@
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_regular"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

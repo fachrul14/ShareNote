@@ -2,10 +2,13 @@ package com.sharenote
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.appcompat.widget.SearchView
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.sharenote.databinding.ActivityMainBinding
@@ -16,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private var noteList: MutableList<Note> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inisialisasi Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance(
             "https://sharenoteapp-16f08-default-rtdb.asia-southeast1.firebasedatabase.app"
@@ -44,17 +49,44 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MainActivity, "Gagal mengambil data user", Toast.LENGTH_SHORT).show()
+                showCustomToast("Gagal mengambil data user")
             }
         })
 
+        // Inisialisasi RecyclerView dan adapter
         setupRecyclerView()
-        loadNotesFromFirebase()
 
-        // Tombol tambah catatan
-        binding.btnAddNote.setOnClickListener {
-            startActivity(Intent(this, AddNoteActivity::class.java))
+        // SearchView listener
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterNotes(newText)
+                return true
+            }
+        })
+
+        // Bottom Navigation listener
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    true // Sudah di halaman ini
+                }
+                R.id.nav_add -> {
+                    startActivity(Intent(this, AddNoteActivity::class.java))
+                    true
+                }
+                R.id.nav_account -> {
+                    startActivity(Intent(this, AccountActivity::class.java))
+                    true
+                }
+                else -> false
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadNotesFromFirebase()
     }
 
     private fun setupRecyclerView() {
@@ -71,22 +103,53 @@ class MainActivity : AppCompatActivity() {
         database.child("notes").child(currentUser.uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val notes = mutableListOf<Note>()
-
+                    noteList.clear()
                     for (noteSnapshot in snapshot.children) {
                         val note = noteSnapshot.getValue(Note::class.java)
                         if (note != null) {
-                            notes.add(note)
+                            note.id = noteSnapshot.key ?: ""
+                            noteList.add(note)
                         }
                     }
-
-                    noteAdapter.setNotes(notes)
+                    noteAdapter.setNotes(noteList)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@MainActivity, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
+                    showCustomToast("Gagal mengambil data")
                 }
             })
     }
 
+    private fun filterNotes(query: String?) {
+        val filteredList = ArrayList<Note>()
+
+        if (!query.isNullOrEmpty()) {
+            for (note in noteList) {
+                if (
+                    (note.title ?: "").contains(query, ignoreCase = true) ||
+                    (note.courseName ?: "").contains(query, ignoreCase = true)
+                ) {
+                    filteredList.add(note)
+                }
+            }
+        } else {
+            filteredList.addAll(noteList)
+        }
+
+        noteAdapter.updateList(filteredList)
+    }
+
+    // ✅ Custom Toast
+    private fun showCustomToast(message: String) {
+        val layoutInflater = layoutInflater
+        val layout: View = layoutInflater.inflate(R.layout.custom_toast, null)
+
+        val textView = layout.findViewById<TextView>(R.id.toast_text)
+        textView.text = message
+
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
+    }
 }

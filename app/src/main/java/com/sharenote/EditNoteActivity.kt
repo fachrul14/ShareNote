@@ -1,21 +1,23 @@
 package com.sharenote
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.sharenote.databinding.ActivityAddNoteBinding
+import com.sharenote.databinding.ActivityEditNoteBinding
 
 class EditNoteActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddNoteBinding
+    private lateinit var binding: ActivityEditNoteBinding
     private lateinit var auth: FirebaseAuth
     private var noteId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddNoteBinding.inflate(layoutInflater)
+        binding = ActivityEditNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
@@ -34,9 +36,21 @@ class EditNoteActivity : AppCompatActivity() {
         binding.etDriveLink.setText(driveLink)
 
         // Tombol Simpan
-        binding.btnSave.setOnClickListener {
+        binding.btnUpdate.setOnClickListener {
             updateNote()
         }
+    }
+
+    private fun showCustomToast(message: String) {
+        val inflater = layoutInflater
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+        val text = layout.findViewById<TextView>(R.id.toast_text)
+        text.text = message
+
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 
     private fun updateNote() {
@@ -44,7 +58,7 @@ class EditNoteActivity : AppCompatActivity() {
         val id = noteId
 
         if (id == null) {
-            Toast.makeText(this, "Data catatan tidak ditemukan", Toast.LENGTH_SHORT).show()
+            showCustomToast("Data catatan tidak ditemukan")
             return
         }
 
@@ -54,7 +68,7 @@ class EditNoteActivity : AppCompatActivity() {
         val updatedDriveLink = binding.etDriveLink.text.toString().trim()
 
         if (updatedTitle.isEmpty() || updatedDescription.isEmpty() || updatedCourseName.isEmpty() || updatedDriveLink.isEmpty()) {
-            Toast.makeText(this, "Harap isi semua kolom", Toast.LENGTH_SHORT).show()
+            showCustomToast("Harap isi semua kolom")
             return
         }
 
@@ -73,12 +87,11 @@ class EditNoteActivity : AppCompatActivity() {
 
         dbRef.setValue(updatedNote)
             .addOnSuccessListener {
-                Toast.makeText(this, "Catatan berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                showCustomToast("Catatan berhasil diperbarui")
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal memperbarui catatan", Toast.LENGTH_SHORT).show()
+                showCustomToast("Gagal memperbarui catatan")
             }
     }
 }
- 

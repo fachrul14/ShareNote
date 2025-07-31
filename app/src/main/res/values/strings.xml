@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Sharenote</string>
     <string name="judul_catatan">Judul Catatan</string>
+    <string name="profile_picture_desc">Profile picture</string>
+    <string name="example_name">Example Name</string>
+    <string name="example_email">emailsample@gmail.com</string>
+    <string name="change_name">Ganti Nama</string>
+    <string name="change_password">Ganti Password</string>
+    <string name="about_app">Tentang Aplikasi</string>
+    <string name="help">Bantuan</string>
+    <string name="logout">Logout</string>
 </resources>

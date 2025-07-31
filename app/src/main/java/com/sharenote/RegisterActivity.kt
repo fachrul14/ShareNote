@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -71,8 +73,6 @@ class RegisterActivity : AppCompatActivity() {
                         if (uid != null) {
                             val database = FirebaseDatabase.getInstance("https://sharenoteapp-16f08-default-rtdb.asia-southeast1.firebasedatabase.app").reference
 
-
-
                             val userMap = HashMap<String, Any>()
                             userMap["name"] = name
                             userMap["email"] = email
@@ -80,34 +80,20 @@ class RegisterActivity : AppCompatActivity() {
                             database.child("users").child(uid).setValue(userMap)
                                 .addOnSuccessListener {
                                     runOnUiThread {
-                                        Toast.makeText(
-                                            this,
-                                            "Register berhasil",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-
+                                        showCustomToast("Register berhasil")
                                         auth.signOut()
                                         startActivity(Intent(this, LoginActivity::class.java))
                                         finish()
                                     }
                                 }
-
                                 .addOnFailureListener {
-                                    Toast.makeText(
-                                        this,
-                                        "Gagal menyimpan data user: ${it.message}",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    showCustomToast("Gagal menyimpan data user: ${it.message}")
                                 }
                         } else {
-                            Toast.makeText(this, "UID tidak ditemukan", Toast.LENGTH_SHORT).show()
+                            showCustomToast("UID tidak ditemukan")
                         }
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Gagal register: ${task.exception?.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showCustomToast("Gagal register: ${task.exception?.message}")
                     }
                 }
         }
@@ -117,5 +103,17 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun showCustomToast(message: String) {
+        val layoutInflater = LayoutInflater.from(this)
+        val layout = layoutInflater.inflate(R.layout.custom_toast, null)
+        val toastText: TextView = layout.findViewById(R.id.toast_text)
+        toastText.text = message
+
+        val toast = Toast(this)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
     }
 }
